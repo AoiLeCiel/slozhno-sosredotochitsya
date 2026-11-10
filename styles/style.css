@@ -45,7 +45,7 @@
 
 .header {
   display: grid;
-  grid-template-rows: 1fr auto auto;
+  grid-template-columns: 1fr;
   min-block-size: var(--header-min-height);
   block-size: 100vh;
   padding: var(--page-padding);
@@ -55,7 +55,7 @@
 .header__rec {
   position: absolute;
   inset-block-start: var(--page-padding);
-  inset-inline-end: var(--page-padding);
+  inset-inline-end: calc(var(--page-padding) + 9px);
   z-index: 1;
   font-size: 18px;
   font-weight: normal;
@@ -77,9 +77,10 @@
 }
 
 .header__theme-menu {
-  justify-self: end;
-  align-self: start;
-  margin-block-start: 65px;
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 75px;
+  inset-inline-end: var(--page-padding);
 }
 
 .header__theme-menu-list {
@@ -137,8 +138,10 @@
 }
 
 .header__subtitle {
-  justify-self: stretch;
-  align-self: end;
+  position: absolute;
+  inset-block-end: var(--page-padding);
+  inset-inline-start: var(--page-padding);
+  inset-inline-end: var(--page-padding);
   font-size: 18px;
   font-weight: bold;
   line-height: 23.4px;
@@ -254,13 +257,10 @@
 @media (min-width: 768px) {
   .header {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr auto;
   }
 
   .header__theme-menu {
-    grid-column: 2;
-    justify-self: end;
-    margin-block-start: 172px;
+    inset-block-start: 192px;
   }
 
   .header__title {
@@ -271,11 +271,15 @@
   }
 
   .header__subtitle {
-    grid-column: 2;
+    inset-inline-start: 50%;
   }
 
   .footer__title {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  }
+
+  .main {
+    gap: 80px;
   }
 
   .content-section_why,
@@ -295,6 +299,10 @@
   .content-section_tips .content-section__cards {
     grid-row: 1;
     grid-column: 2;
+  }
+
+  .content-section_causes .content-section__title {
+    max-inline-size: min(315px, calc((100% - 20px) / 3));
   }
 
   .gallery {
@@ -336,10 +344,10 @@
 
 @media (min-width: 1024px) {
   .header__theme-menu {
-    grid-column: 1 / -1;
-    justify-self: center;
-    align-self: start;
-    margin-block-start: 0;
+    inset-block-start: var(--page-padding);
+    inset-inline-end: auto;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
   }
 
   .header__theme-menu-list {
@@ -348,8 +356,8 @@
   }
 
   .header__subtitle {
-    max-inline-size: 491px;
-    justify-self: end;
+    inset-inline-start: auto;
+    inline-size: 491px;
   }
 
   .content-section_causes .content-section__cards {
